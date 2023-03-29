@@ -12,7 +12,7 @@ function App() {
   return (
     <MainLayout>
       <Routes>
-        {/*<Route path="/" element={<PageProducts />} />*/}
+        <Route path="/" element={<PageProducts />} />
         <Route path="cart" element={<PageCart />} />
         <Route path="admin/orders">
           <Route index element={<PageOrders />} />
