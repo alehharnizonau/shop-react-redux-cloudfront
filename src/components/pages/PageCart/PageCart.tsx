@@ -9,10 +9,11 @@ import ReviewOrder from "~/components/pages/PageCart/components/ReviewOrder";
 import PaperLayout from "~/components/PaperLayout/PaperLayout";
 import { Address, AddressSchema, Order } from "~/models/Order";
 import Box from "@mui/material/Box";
-import { useCart, useInvalidateCart } from "~/queries/cart";
+import { useInvalidateCart } from "~/queries/cart";
 import AddressForm from "~/components/pages/PageCart/components/AddressForm";
 import { useSubmitOrder } from "~/queries/orders";
 import { CartItem } from "~/models/CartItem";
+import { cart } from "~/mocks/data";
 
 enum CartStep {
   ReviewCart,
@@ -45,7 +46,7 @@ const steps = ["Review your cart", "Shipping address", "Review your order"];
 
 export default function PageCart() {
   // const { data = [] } = useCart();
-  const data: CartItem[] = [];
+  const data: CartItem[] = cart;
   const { mutate: submitOrder } = useSubmitOrder();
   const invalidateCart = useInvalidateCart();
   const [activeStep, setActiveStep] = React.useState<CartStep>(

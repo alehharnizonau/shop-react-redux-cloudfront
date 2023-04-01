@@ -6,6 +6,7 @@ import Remove from "@mui/icons-material/Remove";
 import IconButton from "@mui/material/IconButton";
 import { useInvalidateCart } from "~/queries/cart";
 import { CartItem } from "~/models/CartItem";
+import { cart } from "~/mocks/data";
 
 type AddProductToCartProps = {
   product: Product;
@@ -13,7 +14,7 @@ type AddProductToCartProps = {
 
 export default function AddProductToCart({ product }: AddProductToCartProps) {
   // const { data = [], isFetching } = useCart();
-  const data: CartItem[] = [];
+  const data: CartItem[] = cart;
   const isFetching = false;
   // const { mutate: upsertCart } = useUpsertCart();
   const invalidateCart = useInvalidateCart();
