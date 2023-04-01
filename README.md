@@ -72,4 +72,4 @@ Remove an entire stack configured in `serverless.yml` via CloudFormation.
 
 # Links
 
-## [Link to CloudFront website](https://d2umooc0fgw2y9.cloudfront.net/index.html)
+## [Link to CloudFront website](https://d2umooc0fgw2y9.cloudfront.net/)
