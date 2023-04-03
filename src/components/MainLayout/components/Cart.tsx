@@ -2,10 +2,11 @@ import Badge from "@mui/material/Badge";
 import CartIcon from "@mui/icons-material/ShoppingCart";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
-import { useCart } from "~/queries/cart";
+import { cart } from "~/mocks/data";
 
 export default function Cart() {
-  const { data = [] } = useCart();
+  // const { data = [] } = useCart();
+  const data = cart;
   const badgeContent = data.length || undefined;
 
   return (
