@@ -1,7 +1,9 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type CSVFileImportProps = {
   url: string;
@@ -25,23 +27,39 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
 
   const uploadFile = async () => {
     console.log("uploadFile to", url);
+    const authorization_token = localStorage.getItem("authorization_token");
+    console.log(authorization_token);
 
-    const response = await axios({
-      method: "GET",
-      url,
-      params: {
-        name: encodeURIComponent(file?.name || "default.csv"),
-      },
-    });
-    console.log("File to upload: ", file?.name);
-    console.log("Uploading to: ", response.data);
-    const result = await fetch(response.data, {
-      method: "PUT",
-      body: file,
-    });
-    console.log("Result: ", result);
-    setFile(undefined);
+    try {
+      const response = await axios({
+        method: "GET",
+        url,
+        params: {
+          name: encodeURIComponent(file?.name || "default.csv")
+        },
+        headers: authorization_token
+          ? {
+            Authorization: `Basic ${authorization_token}`
+          }
+          : undefined
+      });
+      console.log("File to upload: ", file?.name);
+      console.log("Uploading to: ", response.data);
+      const result = await fetch(response.data, {
+        method: "PUT",
+        body: file
+      });
+      console.log("Result: ", result);
+      setFile(undefined);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        const statusCode = e.response?.status;
+        const message = `${statusCode} - ${e.response?.data.message}`;
+        toast.error(message);
+      }
+    }
   };
+
   return (
     <Box>
       <Typography variant="h6" gutterBottom>

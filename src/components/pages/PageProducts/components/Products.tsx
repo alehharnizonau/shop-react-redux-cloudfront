@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { formatAsPrice } from "~/utils/utils";
 import AddProductToCart from "~/components/AddProductToCart/AddProductToCart";
 import { useAvailableProducts } from "~/queries/products";
+import { faker } from '@faker-js/faker';
 
 export default function Products() {
   const { data = [], isLoading } = useAvailableProducts();
@@ -25,7 +26,7 @@ export default function Products() {
           >
             <CardMedia
               sx={{ pt: "56.25%" }}
-              image={`https://picsum.photos/id/${index}/200/300`}
+              image={faker.image.technics(1234, 2345, true)}
               title="Image title"
             />
             <CardContent sx={{ flexGrow: 1 }}>
